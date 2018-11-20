@@ -34,6 +34,7 @@
             android:theme="@style/GeneralNoTitle"/>
         <activity android:name=".ScanActivity"/>
         <activity android:name=".NotificationActivity"/>
+        <activity android:name=".PagerActivity"/>
     </application>
 
 </manifest>

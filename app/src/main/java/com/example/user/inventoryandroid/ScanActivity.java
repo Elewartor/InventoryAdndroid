@@ -1,6 +1,7 @@
 package com.example.user.inventoryandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -9,6 +10,8 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.CameraSource;
@@ -31,7 +34,13 @@ public class ScanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_qr_activity);
 
-
+        Button button = findViewById(R.id.button4);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             // нема дозволу
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
@@ -90,6 +99,9 @@ public class ScanActivity extends Activity {
                         @Override
                         public void run() {
                             barcodeInfo.setText(barcodes.valueAt(0).displayValue);
+                            //просто тестив чи перейде на потрыбне актівіті
+//                            Intent intent = new Intent(ScanActivity.this,MainActivity.class);
+//                            startActivity(intent);
                         }
                     });
                 }

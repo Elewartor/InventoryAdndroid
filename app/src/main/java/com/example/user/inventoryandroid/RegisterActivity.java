@@ -40,6 +40,14 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button button1=findViewById(R.id.button2);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,PagerActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onCreateAccount(View view){
