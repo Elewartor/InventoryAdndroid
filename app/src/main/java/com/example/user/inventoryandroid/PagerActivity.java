@@ -1,23 +1,16 @@
 package com.example.user.inventoryandroid;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.util.SparseArray;
-import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,11 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.vision.CameraSource;
-import com.google.android.gms.vision.Detector;
-import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
-import java.io.IOException;
 
 public class PagerActivity extends FragmentActivity {
     static final String TAG = "myLogs";
@@ -67,15 +57,6 @@ public class PagerActivity extends FragmentActivity {
         listView = findViewById(R.id.listView);
         btn_search = findViewById(R.id.button3);
 
-
-
-//        constraintLayout.removeView(listView);
-//        constraintLayout.removeView(cameraView);
-//        constraintLayout.removeAllViews();
-//        constraintLayout.addView(pager);
-//        constraintLayout.addView(barcodeInfo);
-
-//        constraintLayout.removeView(listView);
         constraintLayout.removeView(search);
 
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
