@@ -3,7 +3,8 @@
     package="com.example.user.inventoryandroid">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,6 +32,9 @@
             android:theme="@style/GeneralWithTitle" />
         <activity android:name=".PostDataActivity"
             android:theme="@style/GeneralNoTitle"/>
+        <activity android:name=".ScanActivity"/>
+        <activity android:name=".NotificationActivity"/>
+        <activity android:name=".PagerActivity"/>
     </application>
 
 </manifest>
