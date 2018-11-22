@@ -11,12 +11,15 @@ import android.widget.Toast;
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText etEmail;
-    private EditText etPassword, etAcceptPassword, name, last_name, group;
+    private EditText etPassword, etAcceptPassword, etName, etLastName, etGroup;
     private Button btCreateAcc;
 
     private String email;
     private String password;
     private String passwordAccept;
+    private String name;
+    private String lastname;
+    private String group;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,9 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.ET_reg_pass);
         etAcceptPassword = findViewById(R.id.ET_reg_apass);
         btCreateAcc = findViewById(R.id.BT_reg_reg);
-        name=findViewById(R.id.ET_reg_name);
-        last_name=findViewById(R.id.ET_reg_last_name);
-        group=findViewById(R.id.ET_reg_group);
+        etName=findViewById(R.id.ET_reg_name);
+        etLastName=findViewById(R.id.ET_reg_last_name);
+        etGroup=findViewById(R.id.ET_reg_group);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +58,15 @@ public class RegisterActivity extends AppCompatActivity {
         email = etEmail.getText().toString();
         password = etPassword.getText().toString();
         passwordAccept = etAcceptPassword.getText().toString();
+        name = etName.getText().toString();
+        lastname = etLastName.getText().toString();
+        group = etGroup.getText().toString();
+
 
         if(password.equals(passwordAccept)){
             String method = "register";
             BackgroundTask backgroundTask = new BackgroundTask(this);
-            backgroundTask.execute(method, email, password);
+            backgroundTask.execute(method, email, password, name, lastname, group);
             finish();
         }else {
             Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show();

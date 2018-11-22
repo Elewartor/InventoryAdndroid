@@ -1,11 +1,8 @@
 package com.example.user.inventoryandroid;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.TextView;
 
 public class InventoryBranchActivity extends AppCompatActivity{
 
@@ -26,7 +23,7 @@ public class InventoryBranchActivity extends AppCompatActivity{
             @Override
             public void sendData(String data) {
                 jsonMData = data;
-                Intent intent = new Intent(getApplicationContext(), InventoryActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LibraryActivity.class);
                 intent.putExtra("json_string_data", data);
                 startActivity(intent);
                 finish();

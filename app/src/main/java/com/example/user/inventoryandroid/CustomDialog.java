@@ -2,7 +2,6 @@ package com.example.user.inventoryandroid;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,15 +11,15 @@ import android.widget.TextView;
 
 public class CustomDialog extends Dialog implements View.OnClickListener{
 
-    private InventoryItems inventoryItems;
+    private LibraryItems libraryItems;
     private TextView comment, name, description, status, res_person, location, price;
     private Image image;
 
 
-    public CustomDialog(@NonNull Context context, InventoryItems inventoryItems) {
+    public CustomDialog(@NonNull Context context, LibraryItems libraryItems) {
         super(context);
 
-        this.inventoryItems = inventoryItems;
+        this.libraryItems = libraryItems;
     }
 
     @Override
@@ -37,13 +36,13 @@ public class CustomDialog extends Dialog implements View.OnClickListener{
         location = findViewById(R.id.location);
         price = findViewById(R.id.price);
 
-        comment.setText(inventoryItems.getComment());
-        name.setText(inventoryItems.getName());
-        description.setText(inventoryItems.getDescription());
-        status.setText(inventoryItems.getStatus());
-        res_person.setText(inventoryItems.getRes_person());
-        location.setText(inventoryItems.getLocation());
-        price.setText(inventoryItems.getPrice());
+//        comment.setText(libraryItems.getComment());
+//        name.setText(libraryItems.getName());
+//        description.setText(libraryItems.getDescription());
+//        status.setText(libraryItems.getStatus());
+//        res_person.setText(libraryItems.getRes_person());
+//        location.setText(libraryItems.getLocation());
+//        price.setText(libraryItems.getPrice());
 
     }
 

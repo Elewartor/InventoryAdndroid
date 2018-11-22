@@ -63,6 +63,9 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         if (method.equals("register")){
             String email = params[1];
             String password = params[2];
+            String name = params[3];
+            String lastName = params[4];
+            String group = params[5];
 
             try {
 
@@ -75,7 +78,10 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 
                 String data =
                         URLEncoder.encode("email","UTF-8") +  "=" + URLEncoder.encode(email,"UTF-8")+"&"+
-                        URLEncoder.encode("pass","UTF-8") +  "=" + URLEncoder.encode(password,"UTF-8");
+                        URLEncoder.encode("pass","UTF-8") +  "=" + URLEncoder.encode(password,"UTF-8")+"&"+
+                        URLEncoder.encode("name","UTF-8") +  "=" + URLEncoder.encode(name,"UTF-8")+"&"+
+                        URLEncoder.encode("lastName","UTF-8") +  "=" + URLEncoder.encode(lastName,"UTF-8")+"&"+
+                        URLEncoder.encode("class_group","UTF-8") +  "=" + URLEncoder.encode(group,"UTF-8");
 
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
