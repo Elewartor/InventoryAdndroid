@@ -1,6 +1,7 @@
 package com.example.user.inventoryandroid;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText etPassword;
     private Button btLogin;
     private Button btRegister;
+    private SharedPreferences userPref;
 
     private String log_email, log_password;
 
