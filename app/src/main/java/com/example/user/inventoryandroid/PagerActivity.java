@@ -21,12 +21,22 @@ import android.widget.TextView;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class PagerActivity extends FragmentActivity {
     static final String TAG = "myLogs";
     static final int PAGE_COUNT = 3;
 
     ViewPager pager;
+
+    private String json_data;
+    private String email;
+    JSONObject jsonObject , emailJSON;
+    JSONArray jsonArray, jsonEmailArray;
+    LibraryListViewAdapter libraryListViewAdapter;
 
     PagerAdapter pagerAdapter;
     private int positionActual;
@@ -59,6 +69,66 @@ public class PagerActivity extends FragmentActivity {
 
         constraintLayout.removeView(search);
 
+
+        libraryListViewAdapter = new LibraryListViewAdapter(this, R.layout.row_layout);
+        listView.setAdapter(libraryListViewAdapter);
+
+
+        json_data = getIntent().getExtras().getString("json_string_data");
+
+        try {
+
+            emailJSON = new JSONObject(email);
+            jsonEmailArray = emailJSON.getJSONArray("server_response1");
+            JSONObject JOemail = jsonEmailArray.getJSONObject(0);
+
+            String email, username, group;
+            TextView tv_email = findViewById(R.id.tv_email);
+            TextView tv_name = findViewById(R.id.tv_name);
+            TextView tv_group = findViewById(R.id.tv_group);
+            email = JOemail.getString("email");
+            username = JOemail.getString("name");
+            group = JOemail.getString("class_group");
+            tv_email.setText(email);
+            tv_name.setText(username);
+            tv_group.setText(group);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        try {
+            jsonObject = new JSONObject(json_data);
+            jsonArray = jsonObject.getJSONArray("server_response");
+
+
+
+            String name, author, year, gCount, left;
+
+            int count=0;
+            while (count<jsonArray.length()){
+
+                JSONObject JO = jsonArray.getJSONObject(count);
+
+                name = JO.getString("name");
+                author = JO.getString("year");
+                year = JO.getString("author");
+                gCount = JO.getString("books_gcount");
+                left = JO.getString("books_left");
+
+                LibraryItems libraryItems = new LibraryItems(name, author, year, gCount, left);
+                libraryListViewAdapter.add(libraryItems);
+
+                count++;
+
+            }
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
         pagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(pagerAdapter);
 //        setPage();
@@ -84,55 +154,6 @@ public class PagerActivity extends FragmentActivity {
 
     }
 
-//    private void scan(){
-////        BarcodeDetector detector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-////        cameraSource = new CameraSource.Builder(this, detector).setRequestedPreviewSize(640, 480).build();
-//
-//        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-//            @Override
-//            public void surfaceCreated(SurfaceHolder holder) {
-//                try {
-//                    //якщщо немає пра, тоді краш
-//                    cameraSource.start(cameraView.getHolder());
-//                } catch (IOException e) {
-//                    Log.e("CAMERA SOURCE", e.getMessage());
-//                }
-//            }
-//
-//            @Override
-//            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//
-//            }
-//
-//            @Override
-//            public void surfaceDestroyed(SurfaceHolder holder) {
-//                cameraSource.stop();
-//                constraintLayout.removeView(cameraView);
-//            }
-//        });
-//
-//        detector.setProcessor(new Detector.Processor<Barcode>() {
-//            @Override
-//            public void release() {
-//
-//            }
-//
-//            @Override
-//            public void receiveDetections(Detector.Detections<Barcode> detections) {
-//                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-//                if (barcodes.size() != 0) {
-//                    barcodeInfo.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            barcodeInfo.setText(barcodes.valueAt(0).displayValue);
-////                            Intent intent = new Intent(PagerActivity.this,MainActivity.class);
-////                            startActivity(intent);
-//                        }
-//                    });
-//                }
-//            }
-//        });
-//    }
 
     private void setPage(){
         if (w==0){
@@ -141,8 +162,8 @@ public class PagerActivity extends FragmentActivity {
         }
         switch (positionActual){
             case 0:
-                listView.setAlpha(0);
-                listView.setClickable(false);
+//                listView.setAlpha(0);
+//                listView.setClickable(false);
                 search.setAlpha(1);
                 search.setClickable(true);
 
@@ -160,7 +181,6 @@ public class PagerActivity extends FragmentActivity {
                 startActivity(intent);
                 break;
         }
-
 
     }
 
