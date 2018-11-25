@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <Button
-        android:alpha="0.1"
+        android:alpha="0"
         android:id="@+id/BT_login_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:alpha="0.1"
+        android:alpha="0"
         android:id="@+id/BT_login_reg"
         android:layout_width="111dp"
         android:layout_height="38dp"
