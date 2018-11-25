@@ -20,18 +20,18 @@ public class LibraryActivity extends AppCompatActivity {
     ListView listView;
     private String email;
 
-//    public static final String APP_PREFERENCES = "mysettings";
-//
-//    public static final String APP_id = "id";
-//    public static final String APP_email = "email";
-//    public static final String APP_pass = "pass";
-//    public static final String APP_lastname = "lastname";
-//    public static final String APP_username = "username";
-//    public static final String APP_group = "group";
-//    public static final String APP_stage = "stage";
-//
-//    SharedPreferences mSettings;
-//    SharedPreferences.Editor editor;
+    public static final String APP_PREFERENCES = "mysettings";
+
+    public static final String APP_id = "id";
+    public static final String APP_email = "email";
+    public static final String APP_pass = "pass";
+    public static final String APP_lastname = "lastname";
+    public static final String APP_username = "username";
+    public static final String APP_group = "group";
+    public static final String APP_stage = "stage";
+
+    SharedPreferences mSettings;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,17 +70,16 @@ public class LibraryActivity extends AppCompatActivity {
             lastname = JOemail.getString("lastname");
             group = JOemail.getString("class_group");
 
-            //rozkomentyi
-//            mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-//            editor = mSettings.edit();
-//
-//            editor.putString(APP_id, id).apply();
-//            editor.putString(APP_email, email).apply();
-//            editor.putString(APP_pass, pass).apply();
-//            editor.putString(APP_username, username).apply();
-//            editor.putString(APP_lastname, lastname).apply();
-//            editor.putString(APP_group, group).apply();
-//            editor.putInt(APP_stage, 1).apply();
+            mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+            editor = mSettings.edit();
+
+            editor.putString(APP_id, id).apply();
+            editor.putString(APP_email, email).apply();
+            editor.putString(APP_pass, pass).apply();
+            editor.putString(APP_username, username).apply();
+            editor.putString(APP_lastname, lastname).apply();
+            editor.putString(APP_group, group).apply();
+            editor.putInt(APP_stage, 1).apply();
 
             tv_id.setText(id);
             tv_email.setText(email);

@@ -37,7 +37,9 @@
         <activity android:name=".ScanActivity" />
         <activity android:name=".NotificationActivity" />
         <activity android:name=".PagerActivity" />
-        <activity android:name=".TransactionAcceptActivity"></activity>
+        <activity android:name=".TransactionAcceptActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".OrdersActivity"></activity>
     </application>
 
 </manifest>
