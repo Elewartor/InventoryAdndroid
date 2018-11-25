@@ -121,7 +121,7 @@ public class ScanActivity extends Activity {
                 //якщо просто закрили форму, тоді масив пустий
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // надали доступ, можна ще щось зробити
-
+                    //q
                 } else {
 
                 }
