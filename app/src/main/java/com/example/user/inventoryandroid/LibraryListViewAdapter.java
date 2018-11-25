@@ -67,8 +67,8 @@ public class LibraryListViewAdapter extends ArrayAdapter {
         itemsHolder.item_name.setText(libraryItems.getName());
         itemsHolder.item_author.setText(libraryItems.getAuthor());
         itemsHolder.item_year.setText(libraryItems.getYear());
-        itemsHolder.item_gcount.setText(libraryItems.getgCount());
-        itemsHolder.item_left.setText(libraryItems.getLeft());
+        itemsHolder.item_gcount.setText("Всього: " + libraryItems.getgCount());
+        itemsHolder.item_left.setText("Залишилось: " + libraryItems.getLeft());
         return row;
     }
 
