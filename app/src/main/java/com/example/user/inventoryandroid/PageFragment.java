@@ -30,6 +30,7 @@ public class PageFragment extends Fragment {
         pageFragment.setArguments(arguments);
         return pageFragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
