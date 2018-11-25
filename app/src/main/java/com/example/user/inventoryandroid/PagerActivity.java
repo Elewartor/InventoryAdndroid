@@ -21,6 +21,10 @@ import android.widget.TextView;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class PagerActivity extends FragmentActivity {
     static final String TAG = "myLogs";
@@ -44,6 +48,13 @@ public class PagerActivity extends FragmentActivity {
     private int w =0;
     private final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private final int MY_PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 101;
+
+    private String json_data;
+    JSONObject jsonObject , emailJSON;
+    JSONArray jsonArray, jsonEmailArray;
+    LibraryListViewAdapter libraryListViewAdapter;
+//    ListView listView;
+    private String email;
     BarcodeDetector detector;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -141,10 +152,67 @@ public class PagerActivity extends FragmentActivity {
         }
         switch (positionActual){
             case 0:
-                listView.setAlpha(0);
-                listView.setClickable(false);
-                search.setAlpha(1);
-                search.setClickable(true);
+                email = getIntent().getExtras().getString("user_data1");
+
+
+                libraryListViewAdapter = new LibraryListViewAdapter(this, R.layout.row_layout);
+                listView = findViewById(R.id.lv_inventory);
+                listView.setAdapter(libraryListViewAdapter);
+
+
+                json_data = getIntent().getExtras().getString("json_string_data");
+
+                try {
+
+                    emailJSON = new JSONObject(email);
+                    jsonEmailArray = emailJSON.getJSONArray("server_response1");
+                    JSONObject JOemail = jsonEmailArray.getJSONObject(0);
+
+                    String email, username, group;
+                    TextView tv_email = findViewById(R.id.tv_name);
+                    TextView tv_name = findViewById(R.id.tv_lastname);
+                    TextView tv_group = findViewById(R.id.tv_group);
+                    email = JOemail.getString("email");
+                    username = JOemail.getString("name");
+                    group = JOemail.getString("class_group");
+                    tv_email.setText(email);
+                    tv_name.setText(username);
+                    tv_group.setText(group);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+                try {
+                    jsonObject = new JSONObject(json_data);
+                    jsonArray = jsonObject.getJSONArray("server_response");
+
+
+
+                    String name, author, year, gCount, left;
+
+                    int count=0;
+                    while (count<jsonArray.length()){
+
+                        JSONObject JO = jsonArray.getJSONObject(count);
+
+                        name = JO.getString("name");
+                        author = JO.getString("year");
+                        year = JO.getString("author");
+                        gCount = JO.getString("books_gcount");
+                        left = JO.getString("books_left");
+
+                        LibraryItems libraryItems = new LibraryItems(name, author, year, gCount, left);
+                        libraryListViewAdapter.add(libraryItems);
+
+                        count++;
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
                 barcodeInfo.setText("CERRRRRRRRRRRRRRr");
                 break;

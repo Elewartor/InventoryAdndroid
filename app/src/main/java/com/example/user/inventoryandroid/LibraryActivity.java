@@ -39,15 +39,29 @@ public class LibraryActivity extends AppCompatActivity {
             jsonEmailArray = emailJSON.getJSONArray("server_response1");
             JSONObject JOemail = jsonEmailArray.getJSONObject(0);
 
-            String email, username, group;
+            String id, email, pass, username, lastname, group;
+
+            TextView tv_id = findViewById(R.id.tv_id);
             TextView tv_email = findViewById(R.id.tv_email);
+            TextView tv_pass = findViewById(R.id.tv_pass);
             TextView tv_name = findViewById(R.id.tv_name);
+            TextView tv_lastname = findViewById(R.id.tv_lastname);
             TextView tv_group = findViewById(R.id.tv_group);
+
+
+            id = JOemail.getString("id");
             email = JOemail.getString("email");
+            pass = JOemail.getString("pass");
             username = JOemail.getString("name");
+            lastname = JOemail.getString("lastname");
             group = JOemail.getString("class_group");
+
+
+            tv_id.setText(id);
             tv_email.setText(email);
+            tv_pass.setText(pass);
             tv_name.setText(username);
+            tv_lastname.setText(lastname);
             tv_group.setText(group);
         } catch (JSONException e) {
             e.printStackTrace();
