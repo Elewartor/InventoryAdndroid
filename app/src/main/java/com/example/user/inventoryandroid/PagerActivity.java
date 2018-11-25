@@ -21,12 +21,18 @@ import android.widget.TextView;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 
 public class PagerActivity extends FragmentActivity {
     static final String TAG = "myLogs";
     static final int PAGE_COUNT = 3;
 
     ViewPager pager;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    LibraryListViewAdapter libraryListViewAdapter;
 
     PagerAdapter pagerAdapter;
     private int positionActual;
@@ -84,55 +90,6 @@ public class PagerActivity extends FragmentActivity {
 
     }
 
-//    private void scan(){
-////        BarcodeDetector detector = new BarcodeDetector.Builder(this).setBarcodeFormats(Barcode.QR_CODE).build();
-////        cameraSource = new CameraSource.Builder(this, detector).setRequestedPreviewSize(640, 480).build();
-//
-//        cameraView.getHolder().addCallback(new SurfaceHolder.Callback() {
-//            @Override
-//            public void surfaceCreated(SurfaceHolder holder) {
-//                try {
-//                    //якщщо немає пра, тоді краш
-//                    cameraSource.start(cameraView.getHolder());
-//                } catch (IOException e) {
-//                    Log.e("CAMERA SOURCE", e.getMessage());
-//                }
-//            }
-//
-//            @Override
-//            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//
-//            }
-//
-//            @Override
-//            public void surfaceDestroyed(SurfaceHolder holder) {
-//                cameraSource.stop();
-//                constraintLayout.removeView(cameraView);
-//            }
-//        });
-//
-//        detector.setProcessor(new Detector.Processor<Barcode>() {
-//            @Override
-//            public void release() {
-//
-//            }
-//
-//            @Override
-//            public void receiveDetections(Detector.Detections<Barcode> detections) {
-//                final SparseArray<Barcode> barcodes = detections.getDetectedItems();
-//                if (barcodes.size() != 0) {
-//                    barcodeInfo.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            barcodeInfo.setText(barcodes.valueAt(0).displayValue);
-////                            Intent intent = new Intent(PagerActivity.this,MainActivity.class);
-////                            startActivity(intent);
-//                        }
-//                    });
-//                }
-//            }
-//        });
-//    }
 
     private void setPage(){
         if (w==0){
@@ -160,7 +117,6 @@ public class PagerActivity extends FragmentActivity {
                 startActivity(intent);
                 break;
         }
-
 
     }
 

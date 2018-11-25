@@ -34,12 +34,15 @@ public class ScanActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scan_qr_activity);
 
+        final TextView textView = findViewById(R.id.textView5);
+
         Button button = findViewById(R.id.button4);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
-            }
+
+        }
         });
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             // нема дозволу
@@ -55,7 +58,6 @@ public class ScanActivity extends Activity {
         else {
 
         }
-
 
         cameraView = (SurfaceView) findViewById(R.id.surfaceView);
         barcodeInfo = (TextView) findViewById(R.id.textView2);
@@ -99,9 +101,13 @@ public class ScanActivity extends Activity {
                         @Override
                         public void run() {
                             barcodeInfo.setText(barcodes.valueAt(0).displayValue);
+                            String id = barcodeInfo.getText().toString();
+                            textView.setText(id);
                             //просто тестив чи перейде на потрыбне актівіті
-//                            Intent intent = new Intent(ScanActivity.this,MainActivity.class);
-//                            startActivity(intent);
+                            Intent intent = new Intent(ScanActivity.this,TransactionAcceptActivity.class);
+                            intent.putExtra("Scan_id", id );
+                            startActivity(intent);
+
                         }
                     });
                 }
