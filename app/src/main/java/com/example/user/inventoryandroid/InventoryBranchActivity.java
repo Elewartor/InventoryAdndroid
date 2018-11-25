@@ -23,8 +23,9 @@ public class InventoryBranchActivity extends AppCompatActivity{
             @Override
             public void sendData(String data) {
                 jsonMData = data;
-                Intent intent = new Intent(getApplicationContext(), LibraryActivity.class);
+                Intent intent = new Intent(getApplicationContext(), PagerActivity.class);
                 intent.putExtra("json_string_data", data);
+                intent.putExtra("user_data1", getIntent().getExtras().getString("user_data"));
                 startActivity(intent);
                 finish();
 
