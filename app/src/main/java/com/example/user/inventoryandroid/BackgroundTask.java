@@ -138,7 +138,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+        }
         }else if(method.equals("get_mData")){
             try {
                 URL url = new URL(json_get_mData_url);
@@ -160,7 +160,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+               }
 
         }else if (method.equals("post new data item")){
 

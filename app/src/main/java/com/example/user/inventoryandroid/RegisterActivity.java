@@ -51,6 +51,14 @@ public class RegisterActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        Button button2 = findViewById(R.id.button5);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,InventoryBranchActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onCreateAccount(View view){
