@@ -1,9 +1,13 @@
 package com.example.user.inventoryandroid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -125,5 +129,39 @@ public class LibraryActivity extends AppCompatActivity {
 
 
     }
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.title_menu, menu);
+
+        return true;
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+
+            case R.id.profile:
+                startActivity(new Intent(this, ProfileActivity.class));
+                return true;
+            case R.id.orders:
+                startActivity(new Intent(this, OrdersActivity.class));
+                return true;
+            case R.id.qr_scanner:
+                startActivity(new Intent(this, ScanActivity.class));
+                return true;
+
+            default:
+
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }
