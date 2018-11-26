@@ -21,7 +21,7 @@ public class OrdersListViewAdapter extends ArrayAdapter {
         this.context = context;
     }
 
-    public void add(@Nullable LibraryItems object) {
+    public void add(@Nullable OrderItems object) {
         super.add(object);
         list.add(object);
     }
@@ -42,35 +42,37 @@ public class OrdersListViewAdapter extends ArrayAdapter {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View row;
         row = convertView;
-        final LibraryListViewAdapter.ItemsHolder itemsHolder;
+        final OrdersListViewAdapter.ItemsHolder itemsHolder;
 
 
         if(row==null){
             LayoutInflater layoutInflater = (LayoutInflater) this.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.row_layout, parent, false);
-            itemsHolder = new LibraryListViewAdapter.ItemsHolder();
-            itemsHolder.item_name = row.findViewById(R.id.tv_book_name);
-            itemsHolder.item_author = row.findViewById(R.id.tv_book_author);
-            itemsHolder.item_year = row.findViewById(R.id.tv_book_year);
-            itemsHolder.item_gcount = row.findViewById(R.id.tv_library_gcount);
-            itemsHolder.item_left = row.findViewById(R.id.tv_library_left);
+            row = layoutInflater.inflate(R.layout.order_row_layout, parent, false);
+            itemsHolder = new OrdersListViewAdapter.ItemsHolder();
+            itemsHolder.item_name = row.findViewById(R.id.textView6);
+            itemsHolder.item_author = row.findViewById(R.id.textView7);
+            itemsHolder.item_year = row.findViewById(R.id.textView8);
+            itemsHolder.item_order_date = row.findViewById(R.id.textView9);
+            itemsHolder.item_days_ordered = row.findViewById(R.id.textView10);
+            itemsHolder.item_order_end = row.findViewById(R.id.textView11);
             row.setTag(itemsHolder);
         }else{
-            itemsHolder = (LibraryListViewAdapter.ItemsHolder) row.getTag();
+            itemsHolder = (OrdersListViewAdapter.ItemsHolder) row.getTag();
         }
 
-        final LibraryItems libraryItems = (LibraryItems) this.getItem(position);
+        final OrderItems orderItems = (OrderItems) this.getItem(position);
 
-        itemsHolder.item_name.setText(libraryItems.getName());
-        itemsHolder.item_author.setText(libraryItems.getAuthor());
-        itemsHolder.item_year.setText(libraryItems.getYear());
-        itemsHolder.item_gcount.setText("Всього: " + libraryItems.getgCount());
-        itemsHolder.item_left.setText("Залишилось: " + libraryItems.getLeft());
+        itemsHolder.item_name.setText(orderItems.getName());
+        itemsHolder.item_author.setText(orderItems.getAuthor());
+        itemsHolder.item_year.setText(orderItems.getYear());
+        itemsHolder.item_order_date.setText(orderItems.getDate());
+        itemsHolder.item_days_ordered.setText(orderItems.getDays());
+        itemsHolder.item_order_end.setText(orderItems.getEndDate());
         return row;
     }
 
     static class ItemsHolder{
-        TextView item_name, item_author, item_year, item_gcount, item_left;
+        TextView item_name, item_author, item_year, item_order_date, item_days_ordered, item_order_end;
     }
 }
 

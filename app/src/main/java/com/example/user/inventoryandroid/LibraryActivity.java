@@ -144,7 +144,7 @@ public class LibraryActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.profile:
-                startActivity(new Intent(this, TransactionAcceptActivity.class));
+                startActivity(new Intent(this, ProfileActivity.class));
                 return true;
             case R.id.orders:
                 startActivity(new Intent(this, OrdersActivity.class));

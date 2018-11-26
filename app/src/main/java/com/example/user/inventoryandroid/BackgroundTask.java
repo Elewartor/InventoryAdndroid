@@ -59,6 +59,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
         String user_data = "https://elewartors.000webhostapp.com/get_user_data.php";
         String get_book_by_qr_id = "https://elewartors.000webhostapp.com/getBookByQR.php";
         String create_order = "https://elewartors.000webhostapp.com/createOrder.php";
+        String get_user_orders = "https://elewartors.000webhostapp.com/getUserOrders.php";
 
         method = params[0];
 
@@ -286,7 +287,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             String book_id = params[2];
             try {
 
-                URL url = new URL(get_book_by_qr_id);
+                URL url = new URL(create_order);
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setRequestMethod("POST");
                 httpURLConnection.setDoOutput(true);
@@ -303,6 +304,41 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 httpURLConnection.disconnect();
 
                 return "Order was created success";
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else if(method.equals("getOrdersInfo")){
+            String id = params[1];
+
+            try {
+                URL url = new URL(get_user_orders);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data =
+                        URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
