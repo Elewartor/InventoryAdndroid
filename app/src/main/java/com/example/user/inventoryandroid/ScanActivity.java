@@ -131,4 +131,6 @@ public class ScanActivity extends Activity {
         }
     }
 
+    //fffffffffffffffffff
+
 }
