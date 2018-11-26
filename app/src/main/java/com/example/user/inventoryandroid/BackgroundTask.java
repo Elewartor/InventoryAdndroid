@@ -57,6 +57,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 //        String post_url = "https://elewartors.000webhostapp.com/post_data.php";
 //        String delete_item_url = "https://elewartors.000webhostapp.com/delete_data_item.php";
         String user_data = "https://elewartors.000webhostapp.com/get_user_data.php";
+        String get_book_by_qr_id = "https://elewartors.000webhostapp.com/getBookByQR.php";
 
         method = params[0];
 
@@ -243,42 +244,42 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-        }else if(method.equals("getUserDataByEmail")){
-//            String email = params[1];
-//            try {
-//                URL url = new URL(user_data);
-//                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-//
-//                httpURLConnection.setRequestMethod("POST");
-//                httpURLConnection.setDoOutput(true);
-//                httpURLConnection.setDoInput(true);
-//                OutputStream outputStream = httpURLConnection.getOutputStream();
-//                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
-//                String data =
-//                        URLEncoder.encode("email", "UTF-8")+"="+URLEncoder.encode(email,"UTF-8");
-//                bufferedWriter.write(data);
-//                bufferedWriter.flush();
-//                bufferedWriter.close();
-//                outputStream.close();
-//
-//                InputStream inputStream = httpURLConnection.getInputStream();
-//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-//                StringBuilder stringBuilder = new StringBuilder();
-//                String tempData = "";
-//                while ((tempData = bufferedReader.readLine()) != null){
-//
-//                    stringBuilder.append(tempData+"\n");
-//                }
-//                bufferedReader.close();
-//                inputStream.close();
-//                httpURLConnection.disconnect();
-//                return stringBuilder.toString().trim();
-//
-//            } catch (MalformedURLException e) {
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+        }else if(method.equals("getBookByQRId")){
+            String id = params[1];
+
+            try {
+
+                URL url = new URL(get_book_by_qr_id);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data =
+                        URLEncoder.encode("id", "UTF-8")+"="+URLEncoder.encode(id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                return response;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
