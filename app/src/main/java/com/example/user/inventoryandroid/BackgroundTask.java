@@ -58,6 +58,7 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
 //        String delete_item_url = "https://elewartors.000webhostapp.com/delete_data_item.php";
         String user_data = "https://elewartors.000webhostapp.com/get_user_data.php";
         String get_book_by_qr_id = "https://elewartors.000webhostapp.com/getBookByQR.php";
+        String create_order = "https://elewartors.000webhostapp.com/createOrder.php";
 
         method = params[0];
 
@@ -280,6 +281,34 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else if(method.equals("createOrder")){
+            String user_id = params[1];
+            String book_id = params[2];
+            try {
+
+                URL url = new URL(get_book_by_qr_id);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String data =
+                        URLEncoder.encode("bookId", "UTF-8")+"="+URLEncoder.encode(book_id,"UTF-8")+"&"+
+                        URLEncoder.encode("userId", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8");
+                bufferedWriter.write(data);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                httpURLConnection.disconnect();
+
+                return "Order was created success";
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
 
@@ -316,7 +345,8 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             if(result.equals("Item was deleted success")){
                 Toast.makeText(context, "Item was deleted success", Toast.LENGTH_SHORT).show();
             }
-        }else if(method.equals("getUserDataByEmail")){
+        }else if(method.equals("createOrder")){
+            Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         }
     }
 }

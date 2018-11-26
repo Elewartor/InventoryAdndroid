@@ -66,4 +66,9 @@ public class TransactionAcceptActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        // Dismissing 'Back' Button
+    }
 }
