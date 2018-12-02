@@ -295,15 +295,24 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
                 OutputStream outputStream = httpURLConnection.getOutputStream();
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
                 String data =
-                        URLEncoder.encode("bookId", "UTF-8")+"="+URLEncoder.encode(book_id,"UTF-8")+"&"+
-                        URLEncoder.encode("userId", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8");
+                        URLEncoder.encode("userId", "UTF-8")+"="+URLEncoder.encode(user_id,"UTF-8")+"&"+
+                        URLEncoder.encode("bookId", "UTF-8")+"="+URLEncoder.encode(book_id,"UTF-8");
                 bufferedWriter.write(data);
                 bufferedWriter.flush();
                 bufferedWriter.close();
                 outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "iso-8859-1"));
+                String response = "";
+                String line = "";
+                while ((line = bufferedReader.readLine())!=null){
+                    response+=line;
+                }
+                bufferedReader.close();
+                inputStream.close();
                 httpURLConnection.disconnect();
 
-                return "Order was created success";
+                return response;
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -381,8 +390,6 @@ public class BackgroundTask extends AsyncTask<String,Void,String> {
             if(result.equals("Item was deleted success")){
                 Toast.makeText(context, "Item was deleted success", Toast.LENGTH_SHORT).show();
             }
-        }else if(method.equals("createOrder")){
-            Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
         }
     }
 }
